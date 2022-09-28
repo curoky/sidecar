@@ -1,0 +1,159 @@
+version: '3.9'
+
+volumes:
+  data-volume:
+
+services:
+  # Port: 4000x
+  postgres:
+    image: postgres:14
+    restart: unless-stopped
+    ports:
+      - 40001:5432
+    volumes: # Don't remove permanent storage for index database files!
+      - data-volume:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: door
+      POSTGRES_PASSWORD: door
+      POSTGRES_DB: core
+
+  # Port: 401xx
+  zookeeper:
+    build:
+      context: .
+      dockerfile: ./app/zookeeper/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 40100:2181
+
+  # Port: 4011x
+  ui_zk:
+    image: elkozmon/zoonavigator
+    restart: unless-stopped
+    ports:
+      - 40110:40110
+    environment:
+      HTTP_PORT: 40110
+      CONNECTION_x_NAME: zookeeper
+      CONNECTION_x_CONN: zookeeper:2181
+      AUTO_CONNECT_CONNECTION_ID: x
+    depends_on:
+      - zookeeper
+
+  # Port: 402xx
+  mysql:
+    image: mysql:8
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    ports:
+      - '40200:40200'
+    environment: # https://dev.mysql.com/doc/refman/5.7/en/environment-variables.html
+      MYSQL_ROOT_PASSWORD: door
+      MYSQL_TCP_PORT: 40200
+
+  # Port: 403xx
+  # mangodb:
+
+  # Port: 404xx
+  # redis:
+
+  # Port: 405xx
+  # rocksdb:
+
+  # Port: 406xx
+  # elasticsearch
+
+  # Port: 407xx
+  # etcd:
+
+  # Port: 408xx
+  kafka:
+    build:
+      context: .
+      dockerfile: ./app/kafka/Dockerfile
+    restart: unless-stopped
+    ports:
+      - '40800:40800'
+    depends_on:
+      - zookeeper
+
+  # Port: 4081x
+  ui_kafka_1:
+    image: obsidiandynamics/kafdrop
+    restart: unless-stopped
+    ports:
+      - '40810:9000'
+    environment:
+      KAFKA_BROKERCONNECT: kafka:40800
+    depends_on:
+      - kafka
+
+  # Port: 4082x
+  ui_kafka_2:
+    image: quay.io/cloudhut/kowl:master
+    restart: unless-stopped
+    ports:
+      - '40820:8080'
+    environment:
+      KAFKA_BROKERS: kafka:40800
+    depends_on:
+      - kafka
+
+  # Port: 419xx
+  adminer:
+    image: adminer:4
+    restart: unless-stopped
+    ports:
+      - 41900:8080
+
+  # Port: 420xx dfs: 4200x yarn: 4201x
+  hadoop:
+    build:
+      context: .
+      dockerfile: ./app/hadoop/Dockerfile
+    restart: unless-stopped
+    ports:
+      - 42001:42001
+      - 42002:42002
+      - 42012:42012
+      - 42016:42016
+
+  # Port: 421xx
+  hive:
+    build:
+      context: .
+      dockerfile: ./app/hive/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - hadoop
+
+  # Port: 431xx
+  httpbin:
+    image: kennethreitz/httpbin
+    restart: unless-stopped
+    ports:
+      - '43100:80'
+
+  # Port: 432xx
+  spark:
+    build:
+      context: .
+      dockerfile: ./app/spark/Dockerfile
+    restart: unless-stopped
+    ports:
+      - '43201:43201'
+    depends_on:
+      - hadoop
+
+  # Port: 433xx
+  flink:
+    build:
+      context: .
+      dockerfile: ./app/flink/Dockerfile
+    restart: unless-stopped
+    ports:
+      - '62101:62101'
+    depends_on:
+      - hadoop
