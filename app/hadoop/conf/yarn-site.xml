@@ -1,0 +1,45 @@
+<!-- https://hadoop.apache.org/docs/stable/hadoop-yarn/hadoop-yarn-common/yarn-default.xml -->
+<configuration>
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+
+  <property>
+    <name>yarn.resourcemanager.address</name>
+    <value>${yarn.resourcemanager.hostname}:42010</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.scheduler.address</name>
+    <value>${yarn.resourcemanager.hostname}:42011</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.webapp.address	</name>
+    <value>${yarn.resourcemanager.hostname}:42012</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.webapp.https.address</name>
+    <value>${yarn.resourcemanager.hostname}:42013</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.resource-tracker.address</name>
+    <value>${yarn.resourcemanager.hostname}:42014</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.admin.address</name>
+    <value>${yarn.resourcemanager.hostname}:42015</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.webapp.address</name>
+    <value>${yarn.resourcemanager.hostname}:42016</value>
+  </property>
+  <property>
+    <name>yarn.nodemanager.webapp.https.address</name>
+    <value>${yarn.resourcemanager.hostname}:42017</value>
+  </property>
+
+  <property>
+    <name>yarn.nodemanager.env-whitelist</name>
+    <value>JAVA_HOME,HADOOP_COMMON_HOME,HADOOP_HDFS_HOME,HADOOP_CONF_DIR,CLASSPATH_PREPEND_DISTCACHE,HADOOP_YARN_HOME,HADOOP_HOME,PATH,LANG,TZ,HADOOP_MAPRED_HOME</value>
+  </property>
+</configuration>
