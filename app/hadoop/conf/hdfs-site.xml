@@ -10,11 +10,11 @@
 
   <property>
     <name>dfs.datanode.http.address</name>
-    <value>0.0.0.0:42001</value>
+    <value>hadoop:42001</value>
   </property>
   <property>
     <name>dfs.namenode.http-address</name>
-    <value>0.0.0.0:42002</value>
+    <value>hadoop:42002</value>
   </property>
 
 </configuration>

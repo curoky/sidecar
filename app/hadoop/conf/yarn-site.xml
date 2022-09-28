@@ -6,6 +6,10 @@
   </property>
 
   <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>hadoop</value>
+  </property>
+  <property>
     <name>yarn.resourcemanager.address</name>
     <value>${yarn.resourcemanager.hostname}:42010</value>
   </property>
