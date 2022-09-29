@@ -37,11 +37,7 @@ RUN mkdir /opt/hadoop \
   && curl -sSL https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz \
     | tar -xz --strip-components=1 -C /opt/hadoop
 
-COPY app/hadoop/conf/core-site.xml /opt/hadoop/etc/hadoop/core-site.xml
-COPY app/hadoop/conf/hadoop-env.sh /opt/hadoop/etc/hadoop/hadoop-env.sh
-COPY app/hadoop/conf/hdfs-site.xml /opt/hadoop/etc/hadoop/hdfs-site.xml
-COPY app/hadoop/conf/yarn-env.sh /opt/hadoop/etc/hadoop/yarn-env.sh
-COPY app/hadoop/conf/yarn-site.xml /opt/hadoop/etc/hadoop/yarn-site.xml
+COPY app/hadoop/conf/* /opt/hadoop/etc/hadoop/
 COPY app/hadoop/entrypoint.sh /opt/hadoop/entrypoint.sh
 
 ###############################################################################
@@ -52,7 +48,7 @@ RUN mkdir /opt/hive \
   && curl -sSL https://dlcdn.apache.org/hive/hive-3.1.3/apache-hive-3.1.3-bin.tar.gz \
     | tar -xz --strip-components=1 -C /opt/hive
 
-COPY app/hive/conf/hive-site.xml /opt/hive/conf/hive-site.xml
+COPY app/hive/conf/* /opt/hive/conf/
 COPY app/hive/entrypoint.sh /opt/hive/entrypoint.sh
 
 WORKDIR /opt/hive

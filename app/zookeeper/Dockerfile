@@ -34,7 +34,7 @@ RUN mkdir /opt/zookeeper \
   && curl -sSL https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz \
     | tar -xz --strip-components=1 -C /opt/zookeeper
 
-COPY app/zookeeper/conf/zoo.cfg /opt/zookeeper/conf/zoo.cfg
+COPY app/zookeeper/conf/* /opt/zookeeper/conf/
 COPY app/zookeeper/entrypoint.sh /opt/zookeeper/entrypoint.sh
 
 WORKDIR /opt/zookeeper

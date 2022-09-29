@@ -36,8 +36,7 @@ RUN mkdir /opt/kafka \
   && curl -L https://downloads.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz \
     | tar -xz --strip-components=1 -C /opt/kafka
 
-COPY app/kafka/conf/zookeeper.properties /opt/kafka/config/zookeeper.properties
-COPY app/kafka/conf/server.properties /opt/kafka/config/server.properties
+COPY app/kafka/conf/* /opt/kafka/config/
 COPY app/kafka/entrypoint.sh /opt/kafka/entrypoint.sh
 
 WORKDIR /opt/kafka

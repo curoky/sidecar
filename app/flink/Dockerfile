@@ -37,11 +37,7 @@ RUN mkdir /opt/hadoop \
   && curl -sSL https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz \
     | tar -xz --strip-components=1 -C /opt/hadoop
 
-COPY app/hadoop/conf/core-site.xml /opt/hadoop/etc/hadoop/core-site.xml
-COPY app/hadoop/conf/hadoop-env.sh /opt/hadoop/etc/hadoop/hadoop-env.sh
-COPY app/hadoop/conf/hdfs-site.xml /opt/hadoop/etc/hadoop/hdfs-site.xml
-COPY app/hadoop/conf/yarn-env.sh /opt/hadoop/etc/hadoop/yarn-env.sh
-COPY app/hadoop/conf/yarn-site.xml /opt/hadoop/etc/hadoop/yarn-site.xml
+COPY app/hadoop/conf/* /opt/hadoop/etc/hadoop/
 COPY app/hadoop/entrypoint.sh /opt/hadoop/entrypoint.sh
 
 ###############################################################################
@@ -50,7 +46,7 @@ RUN mkdir /opt/flink \
   && curl -sSL https://dlcdn.apache.org/flink/flink-1.15.2/flink-1.15.2-bin-scala_2.12.tgz \
     | tar -xz --strip-components=1 -C /opt/flink
 
-COPY app/flink/conf/flink-conf.yaml /opt/flink/conf/flink-conf.yaml
+COPY app/flink/conf/* /opt/flink/conf/
 COPY app/flink/entrypoint.sh /opt/flink/entrypoint.sh
 
 WORKDIR /opt/flink
