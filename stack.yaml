@@ -157,3 +157,12 @@ services:
       - '62101:62101'
     depends_on:
       - hadoop
+
+  warmup:
+    build:
+      context: .
+      dockerfile: ./warmup/Dockerfile
+    depends_on:
+      - kafka
+      - spark
+      - flink
