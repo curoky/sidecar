@@ -18,6 +18,8 @@
 
 set -xeuo pipefail
 
+sudo service ssh start
+
 bin/zkServer.sh start
 
 while true; do sleep 1000; done
