@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  restart:
+    cmds:
+      - docker compose -f stack.yaml kill
+      - docker compose -f stack.yaml rm -f
+      - docker compose -f stack.yaml build
+      - docker compose -f stack.yaml up
