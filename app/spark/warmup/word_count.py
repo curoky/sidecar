@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # Copyright (c) 2018-2022 curoky(cccuroky@gmail.com).
 #
-# This file is part of my-own-x.
-# See https://github.com/curoky/my-own-x for further info.
+# This file is part of sidercar.
+# See https://github.com/curoky/sidercar for further info.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import sys
 import logging
+import sys
 from operator import add
+
 import pyspark
 
 

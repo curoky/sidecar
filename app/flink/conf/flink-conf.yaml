@@ -16,7 +16,6 @@
 # limitations under the License.
 ################################################################################
 
-
 #==============================================================================
 # Common
 #==============================================================================
@@ -45,7 +44,6 @@ jobmanager.rpc.port: 6123
 # interface, such as 0.0.0.0.
 
 jobmanager.bind-host: localhost
-
 
 # The total process memory size for the JobManager.
 #
@@ -126,7 +124,6 @@ parallelism.default: 1
 #
 # high-availability.zookeeper.quorum: localhost:2181
 
-
 # ACL options are based on https://zookeeper.apache.org/doc/r3.1.2/zookeeperProgrammers.html#sc_BuiltinACLSchemes
 # It can be either "creator" (ZOO_CREATE_ALL_ACL) or "open" (ZOO_OPEN_ACL_UNSAFE)
 # The default value is "open" and it can be changed to "creator" if ZK security is enabled
@@ -201,7 +198,6 @@ rest.address: localhost
 # network interface, such as 0.0.0.0.
 #
 rest.bind-address: 0.0.0.0
-
 # Flag to specify whether job submission is enabled from the web-based
 # runtime monitor. Uncomment to disable.
 

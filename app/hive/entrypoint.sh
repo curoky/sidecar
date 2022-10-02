@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Copyright (c) 2018-2022 curoky(cccuroky@gmail.com).
 #
-# This file is part of my-own-x.
-# See https://github.com/curoky/my-own-x for further info.
+# This file is part of sidercar.
+# See https://github.com/curoky/sidercar for further info.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,10 +20,10 @@ set -xeuo pipefail
 
 sudo service ssh start
 
-$HADOOP_HOME/bin/hadoop fs -mkdir       /tmp
-$HADOOP_HOME/bin/hadoop fs -mkdir -p    /user/hive/warehouse
-$HADOOP_HOME/bin/hadoop fs -chmod g+w   /tmp
-$HADOOP_HOME/bin/hadoop fs -chmod g+w   /user/hive/warehouse
+$HADOOP_HOME/bin/hadoop fs -mkdir /tmp
+$HADOOP_HOME/bin/hadoop fs -mkdir -p /user/hive/warehouse
+$HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp
+$HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
 $HIVE_HOME/bin/schematool -dbType derby -initSchema
 
 while true; do sleep 1000; done
