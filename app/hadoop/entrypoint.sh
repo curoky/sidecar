@@ -23,6 +23,4 @@ sudo service ssh start
 /opt/hadoop/sbin/start-dfs.sh
 /opt/hadoop/sbin/start-yarn.sh
 
-/opt/hadoop/bin/hadoop fs -put /opt/hadoop/LICENSE.txt /LICENSE.txt
-
 while true; do sleep 1000; done
