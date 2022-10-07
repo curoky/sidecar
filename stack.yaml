@@ -74,7 +74,21 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
 
   # Port: 404xx
-  # redis:
+  redis:
+    image: redis:7
+    restart: always
+    ports:
+      - 40400:6379
+    volumes:
+      - ./app/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+
+  redis-commander:
+    image: ghcr.io/joeferner/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - '40401:8081'
 
   # Port: 405xx
   # rocksdb:
