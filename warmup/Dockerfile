@@ -9,7 +9,7 @@ RUN apt-get update -qq \
   && apt-get install -y -qq --no-install-recommends \
     sudo ca-certificates curl git openssh-server openssh-client \
     netcat iputils-ping net-tools iproute2 ncdu \
-    openjdk-11-jdk python3
+    openjdk-11-jdk python3 python3-dev gcc g++
 
 RUN groupadd -g 1000 -o door \
   && useradd -m -u 1000 -g 1000 door \
@@ -50,7 +50,7 @@ RUN mkdir /opt/spark \
 
 RUN sudo apt-get install -y -qq --no-install-recommends \
     python3-pip \
-  && pip3 install --user kafka-python pyspark[sql]
+  && pip3 install --user kafka-python pyspark[sql] redis[hiredis] pymongo[srv]
 
 RUN mkdir /opt/warmup
 

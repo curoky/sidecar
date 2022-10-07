@@ -20,6 +20,16 @@ set -xeuo pipefail
 
 sudo service ssh start
 
+while ! nc -zv redis 6379; do
+  sleep 1
+done
+/opt/redis/warmup/test-set-get.py
+
+while ! nc -zv mongo 27017; do
+  sleep 1
+done
+/opt/mongodb/warmup/test-set-get.py
+
 while ! nc -zv kafka 40800; do
   sleep 1
 done
