@@ -2,7 +2,7 @@
 # Copyright (c) 2022-2022 curoky(cccuroky@gmail.com).
 #
 # This file is part of sidecar.
-# See https://github.com/curoky/sidecar.git for further info.
+# See https://github.com/curoky/sidecar for further info.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
