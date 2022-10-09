@@ -1,0 +1,12 @@
+### >>>>>>> BACKUP START: Kibana interactive setup (2022-10-09T12:29:30.959Z)
+
+#elasticsearch.hosts: http://elasticsearch:9200
+#server.host: "0.0.0.0"
+#server.name: kibana
+
+### >>>>>>> BACKUP END: Kibana interactive setup (2022-10-09T12:29:30.959Z)
+
+# This section was automatically generated during setup.
+elasticsearch.hosts: ['http://localhost:43500']
+server.host: '0.0.0.0'
+server.name: kibana
