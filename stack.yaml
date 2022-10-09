@@ -2,6 +2,7 @@ version: '3.9'
 
 volumes:
   data-volume:
+  log:
 
 services:
   # Port: 4000x
@@ -193,10 +194,66 @@ services:
     depends_on:
       - hadoop
 
+  # Port: 434xx
+  fluentd:
+    build:
+      context: .
+      dockerfile: ./app/fluentd/Dockerfile
+    volumes:
+      - ./output/logs:/var/log/app
+    depends_on:
+      - elasticsearch
+      - warmup
+    # links:
+    #   - 'elasticsearch'
+    ports:
+      - '43400:24224'
+      - '43400:24224/udp'
+
+  # Port: 435xx
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.4.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - http.port=9200
+      - http.cors.enabled=true
+      - http.cors.allow-origin="*"
+      - http.cors.allow-headers="*"
+      - http.cors.allow-credentials=true
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms512m -Xmx512m'
+    expose:
+      - '43500'
+    ports:
+      - '43500:9200'
+
+  # Port: 436xx
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:8.4.3
+
+  #   volumes:
+  #      - ./app/kibana/conf/kibana.yml:/usr/share/kibana/config/kibana.yml
+  #   depends_on:
+  #     - elasticsearch
+  #   network_mode: "host"
+  #   ports:
+  #     - '43600:5601'
+
+  # Port: 437xx
+  elasticsearch_ui_dejavu:
+    image: appbaseio/dejavu
+    depends_on:
+      - elasticsearch
+    ports:
+      - '43700:1358'
+
   warmup:
     build:
       context: .
       dockerfile: ./warmup/Dockerfile
+    volumes:
+      - ./output/logs:/var/log/app
     depends_on:
       - kafka
       - spark
