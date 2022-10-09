@@ -2,8 +2,16 @@ version: '3'
 
 tasks:
   restart:
-    cmds:
-      - docker compose -f stack.yaml kill
-      - docker compose -f stack.yaml rm -f
-      - docker compose -f stack.yaml build
-      - docker compose -f stack.yaml up
+    - docker compose -f stack.yaml kill
+    - docker compose -f stack.yaml rm -f
+    - docker compose -f stack.yaml build
+    - docker compose -f stack.yaml up
+  remove:
+    - docker compose -f stack.yaml kill
+    - docker compose -f stack.yaml rm -f
+  build:
+    - >
+      docker buildx build . --network=host --file common/docker/Dockerfile.ubuntu-sre --push
+      --cache-to=type=inline
+      --cache-from=type=registry,ref=curoky/sidecar:ubuntu22.04-sre
+      --tag curoky/sidecar:ubuntu22.04-sre
