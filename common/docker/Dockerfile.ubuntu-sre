@@ -23,3 +23,8 @@ COPY app/ssh/ssh.conf /etc/ssh/ssh_config.d/door.conf
 COPY app/ssh/sshd.conf /etc/ssh/sshd_config.d/door.conf
 
 USER door
+
+# passwordless ssh
+RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa \
+  && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys \
+  && chmod 0600 ~/.ssh/authorized_keys
