@@ -10,7 +10,10 @@ RUN apt-get update -qq \
     sudo ca-certificates curl wget git ncdu \
     openssh-server openssh-client \
     netcat iputils-ping net-tools iproute2 \
-    openjdk-11-jdk python3 python3-dev gcc g++
+    openjdk-11-jdk python3 python3-dev gcc g++ \
+  && curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
+  && apt-get install -y nodejs \
+  && npm install --global yarn
 
 RUN groupadd -g 1000 -o door \
   && useradd -m -u 1000 -g 1000 door \
