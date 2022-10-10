@@ -20,6 +20,10 @@ set -xeuo pipefail
 
 sudo service ssh start
 
+while ! nc -zv hadoop 42016; do
+  sleep 5
+done
+
 $HADOOP_HOME/bin/hadoop fs -mkdir /tmp
 $HADOOP_HOME/bin/hadoop fs -mkdir -p /user/hive/warehouse
 $HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp

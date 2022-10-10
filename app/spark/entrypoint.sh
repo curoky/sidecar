@@ -20,6 +20,10 @@ set -xeuo pipefail
 
 sudo service ssh start
 
+while ! nc -zv hadoop 42016; do
+  sleep 5
+done
+
 /opt/spark/sbin/start-master.sh --host 0.0.0.0 --port 43200 --webui-port 43201
 # /opt/spark/sbin/start-worker.sh --host 0.0.0.0 --port 43202 --webui-port 43203 spark://0.0.0.0:43200
 

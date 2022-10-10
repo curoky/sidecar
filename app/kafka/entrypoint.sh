@@ -20,6 +20,10 @@ set -xeuo pipefail
 
 sudo service ssh start
 
+while ! nc -zv zookeeper 2181; do
+  sleep 5
+done
+
 # /opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties
 /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties
 

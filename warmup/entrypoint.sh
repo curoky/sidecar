@@ -26,17 +26,17 @@ fi
 sudo chown -R door:door /var/log/app/warmup
 
 while ! nc -zv redis 6379; do
-  sleep 1
+  sleep 5
 done
 /opt/redis/warmup/test-set-get.py >/var/log/app/warmup/redis.log 2>&1
 
 while ! nc -zv mongo 27017; do
-  sleep 1
+  sleep 5
 done
 /opt/mongodb/warmup/test-set-get.py >/var/log/app/warmup/mongodb.log 2>&1
 
 while ! nc -zv kafka 40800; do
-  sleep 1
+  sleep 5
 done
 
 /opt/kafka/warmup/create-test-topic.py >/var/log/app/warmup/kafka-create-test-topic.log 2>&1
@@ -44,12 +44,12 @@ done
 /opt/kafka/warmup/test-consumer.py >/var/log/app/warmup/kafka-consumer.log 2>&1 &
 
 while ! nc -zv hadoop 42016; do
-  sleep 1
+  sleep 5
 done
 /opt/hadoop/warmup/prepare-test-data.sh >/var/log/app/warmup/hadoop.log 2>&1
 
 while ! nc -zv spark 43201; do
-  sleep 1
+  sleep 5
 done
 /opt/spark/warmup/word_count.py /LICENSE.txt >/var/log/app/warmup/spark.log 2>&1
 

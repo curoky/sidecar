@@ -20,6 +20,10 @@ set -xeuo pipefail
 
 sudo service ssh start
 
+while ! nc -zv hadoop 42016; do
+  sleep 5
+done
+
 export HADOOP_CLASSPATH=$(/opt/hadoop/bin/hadoop classpath)
 
 # ./bin/start-cluster.sh
