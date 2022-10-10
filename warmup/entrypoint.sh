@@ -51,6 +51,21 @@ done
 while ! nc -zv spark 43201; do
   sleep 5
 done
-/opt/spark/warmup/word_count.py /LICENSE.txt >/var/log/app/warmup/spark.log 2>&1
+
+scp /opt/spark/warmup/read_kafka.py spark:/opt/spark/read_kafka.py
+ssh spark "
+export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+export HADOOP_HOME=/opt/hadoop
+export SPARK_HOME=/opt/spark
+/opt/spark/bin/spark-submit --master yarn --deploy-mode client --name read_kafka /opt/spark/read_kafka.py" \
+  >/var/log/app/warmup/spark-read_kafka.log 2>&1
+
+scp /opt/spark/warmup/word_count.py spark:/opt/spark/word_count.py
+ssh spark "
+export HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop
+export HADOOP_HOME=/opt/hadoop
+export SPARK_HOME=/opt/spark
+/opt/spark/bin/spark-submit --master yarn --deploy-mode client --name word_count /opt/spark/word_count.py /LICENSE.txt" \
+  >/var/log/app/warmup/spark-word_count.log 2>&1
 
 while true; do sleep 1000; done
