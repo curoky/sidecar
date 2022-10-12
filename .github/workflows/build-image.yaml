@@ -5,13 +5,12 @@ on:
     paths:
       - '.github/workflows/build-image.yaml'
       - 'common/docker/**'
-      # - 'build-system/homebrew/docker/**'
   schedule:
     - cron: '0 0 28 * *'
   workflow_dispatch:
 
 jobs:
-  build:
+  build-ubuntu-sre:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -24,6 +23,7 @@ jobs:
       - uses: docker/build-push-action@v3
         with:
           context: .
+          file: common/docker/Dockerfile.ubuntu-sre
           push: false
           tags: curoky/sidecar:ubuntu22.04-sre
           cache-from: type=registry,ref=curoky/sidecar:ubuntu22.04-sre
