@@ -17,6 +17,8 @@ services:
       POSTGRES_USER: cicada
       POSTGRES_PASSWORD: cicada
       POSTGRES_DB: core
+    networks:
+      - custom
 
   # Port: 401xx
   zookeeper:
@@ -26,6 +28,8 @@ services:
     restart: unless-stopped
     ports:
       - 40100:2181
+    networks:
+      - custom
 
   # Port: 4011x
   ui_zk:
@@ -40,6 +44,8 @@ services:
       AUTO_CONNECT_CONNECTION_ID: x
     depends_on:
       - zookeeper
+    networks:
+      - custom
 
   # Port: 402xx
   mysql:
@@ -53,6 +59,8 @@ services:
     environment: # https://dev.mysql.com/doc/refman/5.7/en/environment-variables.html
       MYSQL_ROOT_PASSWORD: cicada
       MYSQL_TCP_PORT: 40200
+    networks:
+      - custom
 
   # Port: 403xx
   mongo:
@@ -63,6 +71,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    networks:
+      - custom
 
   # mongo-express:
   #   image: mongo-express
@@ -85,6 +95,8 @@ services:
       - 40301:8081
     depends_on:
       - mongo
+    networks:
+      - custom
 
   # Port: 404xx
   redis:
@@ -94,6 +106,8 @@ services:
       - 40400:6379
     volumes:
       - ./app/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - custom
 
   redis-commander:
     image: ghcr.io/joeferner/redis-commander:latest
@@ -104,6 +118,8 @@ services:
       - '40401:8081'
     depends_on:
       - redis
+    networks:
+      - custom
 
   # Port: 405xx
   # rocksdb:
@@ -124,6 +140,8 @@ services:
       - '40800:40800'
     depends_on:
       - zookeeper
+    networks:
+      - custom
 
   # Port: 4081x
   ui_kafka_1:
@@ -135,6 +153,8 @@ services:
       KAFKA_BROKERCONNECT: kafka:40800
     depends_on:
       - kafka
+    networks:
+      - custom
 
   # Port: 4082x
   ui_kafka_2:
@@ -146,6 +166,8 @@ services:
       KAFKA_BROKERS: kafka:40800
     depends_on:
       - kafka
+    networks:
+      - custom
 
   # Port: 419xx
   adminer:
@@ -153,6 +175,8 @@ services:
     restart: unless-stopped
     ports:
       - 41900:8080
+    networks:
+      - custom
 
   # Port: 420xx dfs: 4200x yarn: 4201x
   hadoop:
@@ -165,6 +189,9 @@ services:
       - 42002:42002
       - 42012:42012
       - 42016:42016
+    networks:
+      custom:
+        ipv4_address: '172.20.0.20'
 
   # Port: 421xx
   hive:
@@ -174,6 +201,8 @@ services:
     restart: unless-stopped
     depends_on:
       - hadoop
+    networks:
+      - custom
 
   # Port: 431xx
   httpbin:
@@ -181,6 +210,8 @@ services:
     restart: unless-stopped
     ports:
       - '43100:80'
+    networks:
+      - custom
 
   # Port: 432xx
   spark:
@@ -192,6 +223,9 @@ services:
       - '43201:43201'
     depends_on:
       - hadoop
+    networks:
+      custom:
+        ipv4_address: '172.20.0.32'
 
   # Port: 433xx
   flink:
@@ -203,6 +237,9 @@ services:
       - '62101:62101'
     depends_on:
       - hadoop
+    networks:
+      custom:
+        ipv4_address: '172.20.0.33'
 
   # Port: 434xx
   fluentd:
@@ -219,6 +256,8 @@ services:
     ports:
       - '43400:24224'
       - '43400:24224/udp'
+    networks:
+      - custom
 
   # Port: 435xx
   elasticsearch:
@@ -237,6 +276,8 @@ services:
       - '43500'
     ports:
       - '43500:9200'
+    networks:
+      - custom
 
   # Port: 436xx
   # kibana:
@@ -257,6 +298,8 @@ services:
       - elasticsearch
     ports:
       - '43700:1358'
+    networks:
+      - custom
 
   warmup:
     build:
@@ -268,3 +311,13 @@ services:
       - kafka
       - spark
       - flink
+    networks:
+      - custom
+
+networks:
+  custom:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
