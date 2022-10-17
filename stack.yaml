@@ -14,8 +14,8 @@ services:
     volumes: # Don't remove permanent storage for index database files!
       - data-volume:/var/lib/postgresql/data/
     environment:
-      POSTGRES_USER: door
-      POSTGRES_PASSWORD: door
+      POSTGRES_USER: cicada
+      POSTGRES_PASSWORD: cicada
       POSTGRES_DB: core
 
   # Port: 401xx
@@ -51,7 +51,7 @@ services:
     ports:
       - '40200:40200'
     environment: # https://dev.mysql.com/doc/refman/5.7/en/environment-variables.html
-      MYSQL_ROOT_PASSWORD: door
+      MYSQL_ROOT_PASSWORD: cicada
       MYSQL_TCP_PORT: 40200
 
   # Port: 403xx

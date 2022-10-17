@@ -15,17 +15,17 @@ RUN apt-get update -qq \
   && apt-get install -y nodejs \
   && npm install --global yarn
 
-RUN groupadd -g 1000 -o door \
-  && useradd -m -u 1000 -g 1000 door \
-  && usermod -aG sudo door \
-  && echo "door:door" | chpasswd \
-  && chown door:door -R /opt \
+RUN groupadd -g 1000 -o cicada \
+  && useradd -m -u 1000 -g 1000 cicada \
+  && usermod -aG sudo cicada \
+  && echo "cicada:cicada" | chpasswd \
+  && chown cicada:cicada -R /opt \
   && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-COPY app/ssh/ssh.conf /etc/ssh/ssh_config.d/door.conf
-COPY app/ssh/sshd.conf /etc/ssh/sshd_config.d/door.conf
+COPY app/ssh/ssh.conf /etc/ssh/ssh_config.d/cicada.conf
+COPY app/ssh/sshd.conf /etc/ssh/sshd_config.d/cicada.conf
 
-USER door
+USER cicada
 
 # passwordless ssh
 RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa \

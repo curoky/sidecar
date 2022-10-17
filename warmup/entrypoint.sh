@@ -23,7 +23,7 @@ sudo service ssh start
 if [[ ! -d /var/log/app/warmup ]]; then
   sudo mkdir -p /var/log/app/warmup
 fi
-sudo chown -R door:door /var/log/app/warmup
+sudo chown -R cicada:cicada /var/log/app/warmup
 
 while ! nc -zv redis 6379; do
   sleep 5

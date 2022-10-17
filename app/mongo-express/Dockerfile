@@ -1,6 +1,6 @@
 FROM curoky/sidecar:ubuntu22.04-sre
 
-USER door
+USER cicada
 
 ENV ME_CONFIG_MONGODB_ENABLE_ADMIN="true" \
     ME_CONFIG_MONGODB_ADMINUSERNAME="root" \
