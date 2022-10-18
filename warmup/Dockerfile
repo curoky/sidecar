@@ -13,7 +13,7 @@ COPY app/hadoop/entrypoint.sh /opt/hadoop/entrypoint.sh
 ###############################################################################
 
 RUN mkdir /opt/spark \
-  && curl -sSL https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3-scala2.13.tgz \
+  && curl -sSL https://dlcdn.apache.org/spark/spark-3.3.0/spark-3.3.0-bin-hadoop3.tgz \
     | tar -xz --strip-components=1 -C /opt/spark
 
 ###############################################################################
