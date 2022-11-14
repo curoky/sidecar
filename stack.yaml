@@ -141,7 +141,8 @@ services:
     depends_on:
       - zookeeper
     networks:
-      - custom
+      custom:
+        ipv4_address: '172.20.0.19'
 
   # Port: 4081x
   ui_kafka_1:
@@ -183,6 +184,8 @@ services:
     build:
       context: .
       dockerfile: ./app/hadoop/Dockerfile
+    hostname: hadoop
+    image: curoky/sidecar:hadoop
     restart: unless-stopped
     ports:
       - 42001:42001
@@ -218,6 +221,7 @@ services:
     build:
       context: .
       dockerfile: ./app/spark/Dockerfile
+    image: curoky/sidecar:spark
     restart: unless-stopped
     ports:
       - '43201:43201'
