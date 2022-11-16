@@ -1,4 +1,4 @@
-FROM curoky/sidecar:ubuntu22.04-sre
+FROM curoky/sidecar:ubuntu22.10-sre
 
 ENV HADOOP_HOME=/opt/hadoop
 ENV HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop

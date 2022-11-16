@@ -25,8 +25,8 @@ jobs:
           context: .
           file: common/docker/Dockerfile.ubuntu-sre
           push: true
-          tags: curoky/sidecar:ubuntu22.04-sre
-          cache-from: type=registry,ref=curoky/sidecar:ubuntu22.04-sre
+          tags: curoky/sidecar:ubuntu22.10-sre
+          cache-from: type=registry,ref=curoky/sidecar:ubuntu22.10-sre
           cache-to: type=inline
 
   build-sidecar:

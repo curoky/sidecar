@@ -1,4 +1,4 @@
-FROM curoky/sidecar:ubuntu22.04-sre
+FROM curoky/sidecar:ubuntu22.10-sre
 
 RUN mkdir /opt/zookeeper \
   && curl -sSL https://archive.apache.org/dist/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz \

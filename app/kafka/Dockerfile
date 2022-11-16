@@ -1,4 +1,4 @@
-FROM curoky/sidecar:ubuntu22.04-sre
+FROM curoky/sidecar:ubuntu22.10-sre
 
 # https://kafka.apache.org/quickstart
 
