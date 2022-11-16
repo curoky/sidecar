@@ -2,16 +2,19 @@ version: '3'
 
 tasks:
   restart:
-    - docker compose -f stack.yaml kill
-    - docker compose -f stack.yaml rm -f
-    - docker compose -f stack.yaml build
-    - docker compose -f stack.yaml up
+    - docker compose -f stack.yaml kill {{.CLI_ARGS}}
+    - docker compose -f stack.yaml rm -f {{.CLI_ARGS}}
+    - docker compose -f stack.yaml build {{.CLI_ARGS}}
+    - docker compose -f stack.yaml up {{.CLI_ARGS}} -d
   remove:
     - docker compose -f stack.yaml kill
     - docker compose -f stack.yaml rm -f
-  build:
+  build_sre_image:
     - >
       docker buildx build . --network=host --file common/docker/Dockerfile.ubuntu-sre --push
       --cache-to=type=inline
-      --cache-from=type=registry,ref=curoky/sidecar:ubuntu22.04-sre
-      --tag curoky/sidecar:ubuntu22.04-sre
+      --cache-from=type=registry,ref=curoky/sidecar:ubuntu22.10-sre
+      --tag curoky/sidecar:ubuntu22.10-sre
+  register_host:
+    - echo '172.20.0.19 kafka' >> /etc/hosts
+    - echo '172.20.0.20 hadoop' >> /etc/hosts
