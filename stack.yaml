@@ -148,14 +148,15 @@ services:
   ui_kafka_1:
     image: obsidiandynamics/kafdrop
     restart: unless-stopped
-    ports:
-      - '40810:9000'
+    # ports:
+    #   - '40810:9000'
     environment:
       KAFKA_BROKERCONNECT: kafka:40800
     depends_on:
       - kafka
     networks:
-      - custom
+      custom:
+        ipv4_address: '172.20.0.21'
 
   # Port: 4082x
   ui_kafka_2:
@@ -190,7 +191,7 @@ services:
     ports:
       - 42001:42001
       - 42002:42002
-      - 42012:42012
+      # - 42012:42012
       - 42016:42016
     networks:
       custom:
