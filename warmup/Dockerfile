@@ -20,7 +20,7 @@ RUN mkdir /opt/spark \
 
 RUN sudo apt-get install -y -qq --no-install-recommends \
     python3-pip \
-  && pip3 install --user kafka-python pyspark[sql] redis[hiredis] pymongo[srv]
+  && pip3 install --user kafka-python pyspark[sql] redis[hiredis] pymongo[srv] sqlmodel PyMySQL
 
 RUN mkdir /opt/warmup
 

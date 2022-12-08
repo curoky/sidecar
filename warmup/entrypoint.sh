@@ -29,6 +29,10 @@ while ! nc -zv kafka 40800; do
   sleep 5
 done
 /opt/kafka/warmup/builtin-topic.py >/var/log/app/warmup/builtin-topic.log 2>&1
+while ! nc -zv mysql 40200; do
+  sleep 5
+done
+/opt/mysql/warmup/create_mock_data.py >/var/log/app/warmup/mysql-create_mock_data.log 2>&1 &
 
 while ! nc -zv hadoop 42016; do
   sleep 5

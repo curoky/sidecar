@@ -1,0 +1,7 @@
+[mysqld]
+binlog_format = row
+# log-bin = /var/mysql-bin.log
+expire_logs_days = 1
+max_binlog_size = 100m
+binlog_cache_size = 1m
+max_binlog_cache_size = 512m
