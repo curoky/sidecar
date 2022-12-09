@@ -40,4 +40,4 @@ jobs:
           username: curoky
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: docker compose -f stack.yaml build
-      - run: docker compose -f stack.yaml push spark
+      - run: docker compose -f stack.yaml push spark flink
