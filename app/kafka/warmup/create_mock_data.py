@@ -27,7 +27,7 @@ from kafka.admin import KafkaAdminClient, NewTopic
 def main():
     admin_client = KafkaAdminClient(bootstrap_servers='kafka:40800', client_id='test')
 
-    builtin_topics = ['builtin-value.str-interval.2s']
+    builtin_topics = ['mock_value_str_interval_2s']
     exists_topics = admin_client.list_topics()
     for name in builtin_topics:
         if name not in exists_topics:
@@ -45,7 +45,7 @@ def main():
         for i in range(100000):
             producer.send(topic=builtin_topics[0], value=f'hahaha-{i}'.encode())
             producer.flush()
-            time.sleep(2)
+            time.sleep(5)
 
         producer.close()
 
@@ -58,8 +58,8 @@ def main():
                                  group_id='builtin-' + builtin_topics[0])
         consumer.subscribe([builtin_topics[0]])
         for i in range(100000):
-            message = consumer.poll(2000)
-            if message and i % 30 == 0:
+            message = consumer.poll(5000)
+            if message and i % 10 == 0:
                 logging.info('%s: receive %s', builtin_topics[0], message)
         consumer.close()
 

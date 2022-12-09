@@ -330,7 +330,7 @@ services:
       context: .
       dockerfile: ./warmup/Dockerfile
     volumes:
-      - ./output/logs:/var/log/app
+      - ./output/warmup/logs:/var/log/app
     depends_on:
       - kafka
       - spark

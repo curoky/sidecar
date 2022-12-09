@@ -28,7 +28,8 @@ sudo chown -R cicada:cicada /var/log/app/warmup
 while ! nc -zv kafka 40800; do
   sleep 5
 done
-/opt/kafka/warmup/builtin-topic.py >/var/log/app/warmup/builtin-topic.log 2>&1
+/opt/kafka/warmup/create_mock_data.py >/var/log/app/warmup/kafka-create_mock_data.log 2>&1 &
+
 while ! nc -zv mysql 40200; do
   sleep 5
 done
@@ -37,6 +38,6 @@ done
 while ! nc -zv hadoop 42016; do
   sleep 5
 done
-/opt/hadoop/warmup/prepare-test-data.sh >/var/log/app/warmup/hadoop.log 2>&1
+/opt/hadoop/warmup/create_mock_data.py >/var/log/app/warmup/hadoop-create_mock_data.log 2>&1 &
 
 while true; do sleep 1000; done
