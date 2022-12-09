@@ -257,6 +257,7 @@ services:
     build:
       context: .
       dockerfile: ./app/flink/Dockerfile
+    image: curoky/sidecar:flink
     restart: unless-stopped
     ports:
       - '43300:8082'
