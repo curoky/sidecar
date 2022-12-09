@@ -212,6 +212,7 @@ services:
       - 42002:42002
       # - 42012:42012
       - 42016:42016
+      - 42017:8082 # for flink on yarn
     networks:
       custom:
         ipv4_address: '172.20.0.20'
@@ -258,7 +259,7 @@ services:
       dockerfile: ./app/flink/Dockerfile
     restart: unless-stopped
     ports:
-      - '62101:62101'
+      - '43300:8082'
     depends_on:
       - hadoop
     networks:
