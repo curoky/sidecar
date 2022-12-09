@@ -301,3 +301,6 @@ rest.bind-address: 0.0.0.0
 
 # Interval in milliseconds for refreshing the monitored directories.
 #historyserver.archive.fs.refresh-interval: 10000
+
+classloader.check-leaked-classloader: false
+rest.flamegraph.enabled: true
