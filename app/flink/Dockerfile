@@ -19,8 +19,8 @@ RUN mkdir /opt/flink \
 RUN wget -P /opt/flink/lib/ \
   https://repo1.maven.org/maven2/org/apache/kafka/kafka_2.12/3.3.1/kafka_2.12-3.3.1.jar \
   https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.3.1/kafka-clients-3.3.1.jar \
-  https://repo1.maven.org/maven2/org/apache/flink/flink-connector-kafka/1.16.0/flink-connector-kafka-1.16.0.jar
-  https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-kafka/1.16.0/flink-sql-connector-kafka-1.16.0.jar \
+  https://repo1.maven.org/maven2/org/apache/flink/flink-connector-kafka/1.16.0/flink-connector-kafka-1.16.0.jar \
+  https://repo1.maven.org/maven2/org/apache/flink/flink-sql-connector-kafka/1.16.0/flink-sql-connector-kafka-1.16.0.jar
 
 COPY app/flink/conf/* /opt/flink/conf/
 COPY app/flink/entrypoint.sh /opt/flink/entrypoint.sh
