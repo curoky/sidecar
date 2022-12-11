@@ -2,9 +2,6 @@ name: Build images
 
 on:
   push:
-    paths:
-      - '.github/workflows/build-image.yaml'
-      - 'common/docker/**'
   schedule:
     - cron: '0 0 28 * *'
   workflow_dispatch:
@@ -40,4 +37,4 @@ jobs:
           username: curoky
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: docker compose -f stack.yaml build
-      - run: docker compose -f stack.yaml push spark flink
+      - run: docker compose -f stack.yaml push spark flink hive
