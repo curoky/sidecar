@@ -1,15 +1,19 @@
 version: '3'
 
 tasks:
-  restart:
-    - docker compose -f stack.yaml kill {{.CLI_ARGS}}
-    - docker compose -f stack.yaml rm -f {{.CLI_ARGS}}
-    - docker compose -f stack.yaml build {{.CLI_ARGS}}
-    - docker compose -f stack.yaml up {{.CLI_ARGS}} -d
-  remove:
-    - docker compose -f stack.yaml kill
+  restart-batch:
+    - docker compose -f stack.yaml kill {{.ARGS}} --remove-orphans
+    - docker compose -f stack.yaml rm -f {{.ARGS}}
+    - docker compose -f stack.yaml build {{.ARGS}}
+    - docker compose -f stack.yaml up {{.ARGS}} -d --remove-orphans
+  remove-all:
+    - docker compose -f stack.yaml kill --remove-orphans
     - docker compose -f stack.yaml rm -f
-  build_sre_image:
+  restart-data:
+    - task: restart-batch
+      vars:
+        ARGS: zookeeper mysql canal adminer kafka kafka_ui_kowl hadoop hive spark flink warmup
+  build-sre-image:
     - >
       docker buildx build . --network=host --file common/docker/Dockerfile.ubuntu-sre --push
       --cache-to=type=inline
