@@ -19,6 +19,6 @@
 
 export HADOOP_OS_TYPE=${HADOOP_OS_TYPE:-$(uname -s)}
 
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 export HDFS_NAMENODE_USER=cicada
