@@ -30,4 +30,7 @@ $HADOOP_HOME/bin/hadoop fs -chmod g+w /tmp
 $HADOOP_HOME/bin/hadoop fs -chmod g+w /user/hive/warehouse
 $HIVE_HOME/bin/schematool -dbType derby -initSchema
 
+$HIVE_HOME/bin/hive --service metastore &
+$HIVE_HOME/bin/hive --service hiveserver2 &
+
 while true; do sleep 1000; done
