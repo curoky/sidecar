@@ -184,7 +184,7 @@ rest.port: 8082
 
 # The address to which the REST client will connect to
 #
-rest.address: localhost
+rest.address: hadoop
 
 # Port range for the REST and web server to bind to.
 #
