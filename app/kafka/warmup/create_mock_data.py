@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import logging
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -27,7 +28,7 @@ from kafka.admin import KafkaAdminClient, NewTopic
 def main():
     admin_client = KafkaAdminClient(bootstrap_servers='kafka:40800', client_id='test')
 
-    builtin_topics = ['mock_value_str_interval_2s']
+    builtin_topics = ['mock_key_empty_value_str', 'mock_key_empty_value_json']
     exists_topics = admin_client.list_topics()
     for name in builtin_topics:
         if name not in exists_topics:
@@ -36,7 +37,7 @@ def main():
                 validate_only=False)
             logging.info('created topic: %s', name)
 
-    executor = ThreadPoolExecutor(10)
+    executor = ThreadPoolExecutor(30)
     res = []
 
     def start_producer_1():
@@ -64,6 +65,19 @@ def main():
         consumer.close()
 
     res.append(executor.submit(start_cusumer_1))
+
+    def start_producer_2():
+        producer = KafkaProducer(bootstrap_servers='kafka:40800', acks='all')
+
+        for i in range(100000):
+            value = {'name': str(time.time()), 'age': 10}
+            producer.send(topic=builtin_topics[1], value=json.dumps(value).encode())
+            producer.flush()
+            time.sleep(5)
+
+        producer.close()
+
+    res.append(executor.submit(start_producer_2))
 
     for r in res:
         r.result()
