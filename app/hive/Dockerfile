@@ -17,7 +17,7 @@ ENV HIVE_HOME=/opt/hive
 ENV PATH="$HIVE_HOME/bin:$PATH"
 
 RUN mkdir /opt/hive \
-  && curl -sSL https://dlcdn.apache.org/hive/hive-3.1.3/apache-hive-3.1.3-bin.tar.gz \
+  && curl -sSL https://dlcdn.apache.org/hive/hive-3.1.2/apache-hive-3.1.2-bin.tar.gz \
     | tar -xz --strip-components=1 -C /opt/hive
 
 COPY app/hive/conf/* /opt/hive/conf/
