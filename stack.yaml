@@ -148,11 +148,11 @@ services:
         ipv4_address: '172.20.0.19'
 
   # Port: 4081x
-  ui_kafka_1:
+  kafka_ui_kafdrop:
     image: obsidiandynamics/kafdrop
     restart: unless-stopped
-    # ports:
-    #   - '40810:9000'
+    ports:
+      - '40810:9000'
     environment:
       KAFKA_BROKERCONNECT: kafka:40800
     depends_on:
@@ -162,7 +162,7 @@ services:
         ipv4_address: '172.20.0.21'
 
   # Port: 4082x
-  ui_kafka_2:
+  kafka_ui_kowl:
     image: quay.io/cloudhut/kowl:master
     restart: unless-stopped
     ports:
