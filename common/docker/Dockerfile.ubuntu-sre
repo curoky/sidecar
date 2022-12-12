@@ -3,7 +3,7 @@ FROM ubuntu:22.10
 LABEL org.opencontainers.image.authors="cccuroky@gmail.com"
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 RUN apt-get update -qq \
   && apt-get install -y -qq --no-install-recommends \

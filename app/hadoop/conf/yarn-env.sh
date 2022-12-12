@@ -17,4 +17,4 @@
 
 # Reference: https://github.com/apache/hadoop/blob/branch-3.3.1/hadoop-yarn-project/hadoop-yarn/conf/yarn-env.sh
 
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64

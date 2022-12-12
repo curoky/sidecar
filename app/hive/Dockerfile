@@ -12,7 +12,6 @@ COPY app/hadoop/entrypoint.sh /opt/hadoop/entrypoint.sh
 
 ###############################################################################
 
-ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 ENV HIVE_HOME=/opt/hive
 ENV PATH="$HIVE_HOME/bin:$PATH"
 
