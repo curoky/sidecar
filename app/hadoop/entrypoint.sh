@@ -20,6 +20,8 @@ set -xeuo pipefail
 
 sudo service ssh start
 
+export HADOOP_CLASSPATH=$(/opt/hadoop/bin/hadoop classpath)
+
 /opt/hadoop/sbin/start-dfs.sh
 /opt/hadoop/sbin/start-yarn.sh
 
