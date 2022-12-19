@@ -233,6 +233,22 @@ services:
       custom:
         ipv4_address: '172.20.0.25'
 
+  # Port: 423xx
+  polynote:
+    build:
+      context: .
+      dockerfile: ./app/polynote/Dockerfile
+    image: curoky/sidecar:polynote
+    restart: unless-stopped
+    ports:
+      - 42300:8192
+    #   - 42102:10002
+    # depends_on:
+    #   - hadoop
+    networks:
+      custom:
+        ipv4_address: '172.20.0.28'
+
   # Port: 431xx
   httpbin:
     image: kennethreitz/httpbin
