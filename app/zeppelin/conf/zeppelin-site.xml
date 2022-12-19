@@ -1,0 +1,6 @@
+<configuration>
+  <property>
+    <name>zeppelin.server.addr</name>
+    <value>0.0.0.0</value>
+  </property>
+</configuration>
