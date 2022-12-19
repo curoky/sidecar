@@ -190,6 +190,22 @@ services:
       custom:
         ipv4_address: '172.20.0.23'
 
+  # Port: 410xx
+  clickhouse:
+    build:
+      context: .
+      dockerfile: ./app/clickhouse/Dockerfile
+    restart: unless-stopped
+    # volumes:
+    #   - ./output/app/canal/logs:/opt/canal/logs
+    # ports:
+    #   - '41000:40900'
+    # depends_on:
+    #   - kafka
+    networks:
+      custom:
+        ipv4_address: '172.20.0.26'
+
   # Port: 419xx
   adminer:
     image: adminer:4
