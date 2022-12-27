@@ -380,6 +380,16 @@ services:
     networks:
       - custom
 
+  # Port: 438xx
+  clip-server:
+    build:
+      context: .
+      dockerfile: ./app/clip-server/Dockerfile
+    ports:
+      - '43800:51000'
+    networks:
+      - custom
+
   warmup:
     build:
       context: .
